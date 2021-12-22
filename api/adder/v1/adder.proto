@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option go_package = "github.com/bradbeck/grpc-spire/adder";
+
+message AddRequest {
+    uint64 a = 1;
+    uint64 b = 2;
+}
+
+message AddResponse {
+    uint64 result = 1;
+}
+
+service AddService {
+    rpc Compute (AddRequest) returns (AddResponse) {}
+}

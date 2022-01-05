@@ -122,3 +122,5 @@ cue apply | k delete -f -
 * <https://github.com/spiffe/go-spiffe/tree/main/v2/examples/spiffe-grpc>
 * <https://github.com/spiffe/spire/blob/main/doc/plugin_agent_workloadattestor_k8s.md>
 * <https://github.com/spiffe/spire-tutorials/tree/master/k8s/quickstart>
+* <https://github.com/ryoya-fujimoto/grpc-testing>
+* <https://github.com/google/addlicense>

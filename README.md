@@ -124,3 +124,4 @@ cue apply | k delete -f -
 * <https://github.com/spiffe/spire-tutorials/tree/master/k8s/quickstart>
 * <https://github.com/ryoya-fujimoto/grpc-testing>
 * <https://github.com/google/addlicense>
+* <https://github.com/Nordix/Meridio/blob/master/pkg/nsm/client.go>

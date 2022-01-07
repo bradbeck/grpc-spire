@@ -42,8 +42,10 @@ type server struct {
 }
 
 func (s *server) Compute(ctx context.Context, in *adder.AddRequest) (*adder.AddResponse, error) {
-	log.Printf("Received: %v, %v", in.GetA(), in.GetB())
-	return &adder.AddResponse{Result: in.GetA() + in.GetB()}, nil
+	log.Printf("Received: %v\n", in)
+	return &adder.AddResponse{
+		Result: in.GetA() + in.GetB(),
+	}, nil
 }
 
 func main() {

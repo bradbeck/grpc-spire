@@ -45,7 +45,7 @@ func main() {
 	flag.Parse()
 
 	routes := mux.NewRouter()
-	routes.HandleFunc("/add/{a}/{b}", handler).Methods("GET")
+	routes.HandleFunc("/add/{a}/{b}", handleAdd).Methods("GET")
 
 	fmt.Println("Application is running on: 8080 ...")
 	http.ListenAndServe(":8080", routes)
@@ -77,7 +77,7 @@ func CallAdder(ctx context.Context, in *adder.AddRequest) (*adder.AddResponse, e
 	return adder.NewAddServiceClient(conn).Compute(ctx, in)
 }
 
-func handler(w http.ResponseWriter, r *http.Request) {
+func handleAdd(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	vars := mux.Vars(r)
 	a, err := strconv.ParseUint(vars["a"], 10, 64)

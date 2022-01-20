@@ -125,3 +125,5 @@ cue apply | k delete -f -
 * <https://github.com/ryoya-fujimoto/grpc-testing>
 * <https://github.com/google/addlicense>
 * <https://github.com/Nordix/Meridio/blob/master/pkg/nsm/client.go>
+* <https://github.com/HewlettPackard/k8s-sigstore-attestor/blob/main/pkg/server/plugin/upstreamauthority/spire/spire_server_client.go>
+* <https://github.com/nishantapatil3/spire-federation-kind/blob/main/src/broker-webapp/main.go>

@@ -18,8 +18,8 @@ make all-images
 
 ## Setup Spire
 
-Setup Spire using the quickstart manifests and then wait for the spire server to
-be ready.
+Setup Spire using the spiffe-csi manifests and then wait for the spire server and agent
+to be ready.
 
 ```bash
 k apply -f spiffe-csi/spire-namespace.yaml
@@ -122,8 +122,7 @@ k exec -it -n spire deployment/spire-server -- /opt/spire/bin/spire-server entry
 k apply -f spiffe-csi/client-deployment.yaml
 k rollout status deployment/client
 
-k exec -it $(k get pods -o=jsonpath='{.items[0].metadata.name}' -l app=client)  -- /bin/sh
-/opt/spire/bin/spire-agent api fetch -socketPath /spiffe-workload-api/spire-agent.sock
+k exec -it deployment/client -- /opt/spire/bin/spire-agent api fetch -socketPath /spiffe-workload-api/spire-agent.sock
 ```
 
 ## References

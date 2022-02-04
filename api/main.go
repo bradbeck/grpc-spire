@@ -34,12 +34,9 @@ import (
 	"google.golang.org/grpc"
 )
 
-const (
-	socketpath = "unix:///run/spire/sockets/agent.sock"
-)
-
 var (
-	addr = flag.String("addr", "add-service:50051", "the address of adder service")
+	addr            = flag.String("addr", "add-service:50051", "the address of adder service")
+	workloadAPIAddr = flag.String("workload-api-addr", "", "Workload API Address")
 )
 
 func main() {
@@ -97,7 +94,7 @@ func NewAddClient(ctx context.Context) *AddClient {
 func (addClient *AddClient) getX509Source() *workloadapi.X509Source {
 	source, err := workloadapi.NewX509Source(context.Background(),
 		workloadapi.WithClientOptions(
-			workloadapi.WithAddr(socketpath),
+			workloadapi.WithAddr(*workloadAPIAddr),
 			workloadapi.WithLogger(logger.Std),
 		),
 	)

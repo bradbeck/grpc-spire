@@ -53,17 +53,18 @@ for s in #services {
 							name:          s.service
 						}]
 						volumeMounts: [{
-							name: "spire-agent-socket"
-							mountPath: "/run/spire/sockets"
+							name: "spiffe-workload-api"
+							mountPath: "/spiffe-workload-api"
 							readOnly: true
+						}]
+						env: [{
+							name: "SPIFFE_ENDPOINT_SOCKET"
+							value: "unix:///spiffe-workload-api/spire-agent.sock"
 						}]
 					}]
 					volumes: [{
-						name: "spire-agent-socket"
-						hostPath: {
-							path: "/run/spire/sockets"
-							type: "Directory"
-						}
+						name: "spiffe-workload-api"
+						csi: driver: "csi.spiffe.io"
 					}]
 				}
 			}

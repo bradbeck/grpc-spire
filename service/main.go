@@ -29,12 +29,9 @@ import (
 	"google.golang.org/grpc"
 )
 
-const (
-	socketpath = "unix:///run/spire/sockets/agent.sock"
-)
-
 var (
-	port = flag.Int("port", 50051, "The sever port")
+	port            = flag.Int("port", 50051, "The sever port")
+	workloadAPIAddr = flag.String("workload-api-addr", "", "Workload API Address")
 )
 
 type server struct {
@@ -49,10 +46,12 @@ func (s *server) Compute(ctx context.Context, in *adder.AddRequest) (*adder.AddR
 }
 
 func main() {
+	flag.Parse()
+
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
-	source, err := workloadapi.NewX509Source(ctx, workloadapi.WithClientOptions(workloadapi.WithAddr(socketpath)))
+	source, err := workloadapi.NewX509Source(ctx, workloadapi.WithClientOptions(workloadapi.WithAddr(*workloadAPIAddr)))
 	if err != nil {
 		log.Fatalf("Unable to create X509Source: %v", err)
 	}
@@ -71,7 +70,6 @@ func main() {
 		grpccredentials.MTLSServerCredentials(source, source, tlsconfig.AuthorizeID(clientID)),
 	))
 
-	flag.Parse()
 	lis, err := net.Listen("tcp", fmt.Sprintf("0.0.0.0:%d", *port))
 	if err != nil {
 		log.Fatalf("Failed to listen: %v", err)
